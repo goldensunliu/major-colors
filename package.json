@@ -1,0 +1,22 @@
+{
+  "name": "major-colors",
+  "version": "0.1.0",
+  "description": "color segmentation using kmeans+++ for clustering and CIEDE2000 algorithm for color distance",
+  "main": "dist/lib.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
+  },
+  "author": "Sitian Liu <goldensunliu@gmail.com> (https://www.sitianliu.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "fast-memoize": "^2.5.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
+  }
+}
