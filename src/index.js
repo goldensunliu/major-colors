@@ -1,14 +1,8 @@
 import ciede2000 from "./dE00";
 import KMeansCluster from './cluster';
-import rgb2lab  from './rgb2lab';
-
-function disableSmoothRendering(ctx) {
-  ctx.webkitImageSmoothingEnabled = false;
-  ctx.mozImageSmoothingEnabled = false;
-  ctx.msImageSmoothingEnabled = false;
-  ctx.imageSmoothingEnabled = false;
-  return ctx;
-}
+import rgb2lab, { lab2rgb }  from './rgb2lab';
+import countBy from 'lodash/countBy';
+import sortBy from 'lodash/sortBy';
 
 function centroidsConverged(delta) {
     /**
@@ -46,7 +40,7 @@ export default class MajorColors {
     this.canvas = document.createElement('canvas');
   }
 
-  getMajorColors = ({ k: numberOfColors = 5, quality = 1 }) => {
+  getMajorColors = ({ numberOfColors = 5, quality = 1 }) => {
     const { width, height } = this.originalImage;
     const ratio = Math.min(1, quality);
     this.canvas.width = width * ratio;
@@ -62,26 +56,11 @@ export default class MajorColors {
     }
     // use a lab special diff function
     const cluster = new KMeansCluster({ distanceFn: distance, maximumIterations: 20, convergedFn: centroidsConverged(1.5) });
-    return cluster.cluster(pixelData, numberOfColors);
-  };
-
-  toPixelatedDataUrlSync = ({ percentage }) => {
-    const { width, height } = this.originalImage;
-    const w = width * (percentage <= 0 ? 0.01 : percentage);
-    const h = height * (percentage <= 0 ? 0.01 : percentage);
-    this.canvas.width = width;
-    this.canvas.height = height;
-    const ctx = disableSmoothRendering(this.canvas.getContext('2d'));
-    // render smaller image
-    ctx.drawImage(this.originalImage, 0, 0, w, h);
-    const imageData = ctx.getImageData(0, 0, w, h);
-    ctx.putImageData(imageData, 0, 0);
-    // stretch the smaller image
-    ctx.drawImage(this.canvas, 0, 0, w, h, 0, 0, width, height);
-    return this.canvas.toDataURL('image/png');
-  };
-
-  toPixelatedDataUrl = ({ percentage }) => {
-    return this.toPixelatedDataUrlSync({ percentage })
+    const { model: { centroids, assignments } } = cluster.cluster(pixelData, numberOfColors);
+    let order = countBy(assignments);
+    order = sortBy(Object.entries(order), i => -i[1]);
+    return order.map(o => {
+      return lab2rgb(centroids[o[0]]);
+    });
   };
 }
