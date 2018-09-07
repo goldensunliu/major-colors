@@ -1,6 +1,6 @@
 {
   "name": "major-colors",
-  "version": "0.1.111",
+  "version": "0.1.12",
   "description": "color segmentation using kmeans+++ for clustering and CIEDE2000 algorithm for color distance",
   "main": "dist/lib.js",
   "scripts": {

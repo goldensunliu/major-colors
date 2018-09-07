@@ -4,6 +4,9 @@ import rgb2lab, { lab2rgb }  from './rgb2lab';
 import countBy from 'lodash/countBy';
 import sortBy from 'lodash/sortBy';
 
+// https://en.wikipedia.org/wiki/Just-noticeable_difference
+const JND = 2.3;
+
 function centroidsConverged(delta) {
     /**
      * determine if two consecutive set of centroids are converged given a maximum delta.
@@ -55,7 +58,7 @@ export default class MajorColors {
       pixelData.push([l, a, b])
     }
     // use a lab special diff function
-    const cluster = new KMeansCluster({ distanceFn: distance, maximumIterations: 20, convergedFn: centroidsConverged(1.5) });
+    const cluster = new KMeansCluster({ distanceFn: distance, maximumIterations: 20, convergedFn: centroidsConverged(JND) });
     const { model: { centroids, assignments } } = cluster.cluster(pixelData, numberOfColors);
     let order = countBy(assignments);
     order = sortBy(Object.entries(order), i => -i[1]);
