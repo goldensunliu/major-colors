@@ -1,6 +1,6 @@
 {
   "name": "major-colors",
-  "version": "0.1.12",
+  "version": "0.1.2",
   "description": "color segmentation using kmeans+++ for clustering and CIEDE2000 algorithm for color distance",
   "main": "dist/lib.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "babel-loader": "^8.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "fast-memoize": "^2.5.1",
+    "k-means-plus": "^1.0.0",
     "lodash": "^4.17.10",
     "webpack": "^4.17.1",
     "webpack-cli": "^3.1.0"

@@ -1,5 +1,5 @@
 import ciede2000 from "./dE00";
-import KMeansCluster from './cluster';
+import KMeansCluster from 'k-means-plus';
 import rgb2lab, { lab2rgb }  from './rgb2lab';
 import countBy from 'lodash/countBy';
 import sortBy from 'lodash/sortBy';
