@@ -1,5 +1,6 @@
 # major-colors
-color segmentation using kmeans+++ for clustering and CIEDE2000 algorithm for color distance
+Color segmentation using kmeans+++ for clustering and CIEDE2000 algorithm for color distance.
+Attempt to generate the optimal color palette given an image
 
 ## Client-only!
 This implementation relies on the canvas api to process the image
