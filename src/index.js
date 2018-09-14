@@ -59,7 +59,8 @@ export default class MajorColors {
     }
     // use a lab special diff function
     const cluster = new KMeansCluster({ distanceFn: distance, maximumIterations: 20, convergedFn: centroidsConverged(JND) });
-    const { model: { centroids, assignments } } = cluster.cluster(pixelData, numberOfColors);
+    const clusterResult = cluster.cluster(pixelData, numberOfColors);
+    const { model: { centroids, assignments } } = clusterResult;
     let order = countBy(assignments);
     order = sortBy(Object.entries(order), i => -i[1]);
     return order.map(o => {
