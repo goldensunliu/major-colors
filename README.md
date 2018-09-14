@@ -15,6 +15,21 @@ yarn add major-colors
 import MajorColors from 'major-colors'
 
 const majorColors = new MajorColors(imageDomNode);
-const rGBcolorsInSortedOrder = 
+const { clusterResult, colors } =
   majorColors.getMajorColors({ numberOfColors: 5, quality: .10});
+```
+### Outputs
+#### colors `[[number]]` 
+an array of arrays which represent the colors in RGB vector
+#### clusterResult - raw cluster ouput from [k-means-plus](https://github.com/goldensunliu/k-means-plus#outputs)
+```flow js
+type result = {
+  model: {
+    observations: [[number]], // the original vectors: colors in Lab space
+    centroids: [[number]], // vectors of final cluster centers: colors in Lab space
+    assignments: [number] // mapping from index of original vector to the index of cluter center it belongs to
+  },
+  iterations: number, // number of iterations ran before converging
+  durationMs: number // the duration of the algorithm
+}
 ```

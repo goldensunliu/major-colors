@@ -63,8 +63,9 @@ export default class MajorColors {
     const { model: { centroids, assignments } } = clusterResult;
     let order = countBy(assignments);
     order = sortBy(Object.entries(order), i => -i[1]);
-    return order.map(o => {
+    const colors = order.map(o => {
       return lab2rgb(centroids[o[0]]);
     });
+    return { clusterResult, colors };
   };
 }
