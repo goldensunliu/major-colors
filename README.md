@@ -1,6 +1,7 @@
 # major-colors
 Color segmentation using kmeans+++ for clustering and CIEDE2000 algorithm for color distance.
-Attempt to generate the optimal color palette given an image
+
+[Color Palette Picker App/Demo](https://out-bqkxoqnwce.now.sh) - Attempt to generate the optimal color palette given an image
 
 [Blog Post](https://medium.com/@sitianliu_57680/how-to-pick-the-optimal-color-palette-from-any-image-ef1342da8b4f)
 
